@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Srinath - Frontend Developer & Python Enthusiast</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background: #0a0a0a;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            position: relative;
+        }
+        
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.05"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.03"/><circle cx="50" cy="10" r="0.5" fill="%23ffffff" opacity="0.04"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            pointer-events: none;
+        }
+        
+        .dark-card {
+            background: linear-gradient(145deg, #1e1e1e 0%, #2a2a2a 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 0 30px rgba(102, 126, 234, 0.2);
+        }
+        
+        .skill-tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .skill-tag:hover::before {
+            left: 100%;
+        }
+        
+        .skill-tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.5);
+        }
+        
+        .section-fade {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 1s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .typing-animation {
+            border-right: 3px solid #667eea;
+            animation: blink 1.2s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { border-color: transparent; }
+            51%, 100% { border-color: #667eea; }
+        }
+        
+        .social-icon {
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.15) rotate(5deg);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -8px;
+            left: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.4s ease;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .project-overlay {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
+            opacity: 0;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .text-glow {
+            text-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .pulse-glow {
+            animation: pulseGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes pulseGlow {
+            from { box-shadow: 0 0 20px rgba(102, 126, 234, 0.3); }
+            to { box-shadow: 0 0 30px rgba(102, 126, 234, 0.6); }
+        }
+        
+        .neon-border {
+            border: 2px solid transparent;
+            background: linear-gradient(145deg, #1e1e1e, #2a2a2a) padding-box,
+                        linear-gradient(135deg, #667eea, #764ba2) border-box;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Header Section -->
+    <header class="gradient-bg text-white sticky top-0 z-50 shadow-lg">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold">
+                    <span class="text-white">Srinath</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link hover:text-gray-200">Home</a>
+                    <a href="#about" class="nav-link hover:text-gray-200">About</a>
+                    <a href="#projects" class="nav-link hover:text-gray-200">Projects</a>
+                    <a href="#contact" class="nav-link hover:text-gray-200">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-white">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
+                <a href="#home" class="block py-2 hover:text-gray-200">Home</a>
+                <a href="#about" class="block py-2 hover:text-gray-200">About</a>
+                <a href="#projects" class="block py-2 hover:text-gray-200">Projects</a>
+                <a href="#contact" class="block py-2 hover:text-gray-200">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg text-white py-32 min-h-screen flex items-center relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="floating absolute top-20 left-10 w-20 h-20 bg-purple-500 rounded-full blur-xl"></div>
+            <div class="floating absolute top-40 right-20 w-16 h-16 bg-blue-500 rounded-full blur-lg" style="animation-delay: 1s;"></div>
+            <div class="floating absolute bottom-32 left-1/4 w-12 h-12 bg-pink-500 rounded-full blur-lg" style="animation-delay: 2s;"></div>
+        </div>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="section-fade">
+                <div class="mb-8">
+                    <span class="text-lg md:text-xl text-purple-300 font-medium">👋 Welcome to my digital space</span>
+                </div>
+                <h1 class="text-6xl md:text-8xl font-bold mb-6 text-glow">
+                    Hi, I'm <span class="typing-animation text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Srinath</span>
+                </h1>
+                <p class="text-2xl md:text-3xl mb-4 text-gray-200 font-light">
+                    Frontend Developer & Python Enthusiast
+                </p>
+                <p class="text-lg md:text-xl mb-12 text-gray-300 max-w-2xl mx-auto">
+                    Crafting beautiful, functional web experiences with modern technologies and creative solutions
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-6">
+                   
+                </div>
+                <div class="mt-16 animate-bounce">
+                    <i class="fas fa-chevron-down text-2xl text-purple-400"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/3 section-fade">
+                    <div class="relative group">
+                       
+                        <div class="relative w-80 h-80 rounded-full bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-700 p-1 mx-auto shadow-2xl glow-effect">
+                            <img src="images/profile.jpg" 
+                                 alt="Srinath - Professional Profile Photo" 
+                                 class="w-full h-full rounded-full object-cover border-4 border-gray-900"
+                                 onerror="this.src=''; this.alt='Profile photo failed to load'; this.style.display='none';">
+                            <div class="absolute inset-0 rounded-full bg-gradient-to-r from-purple-400 to-blue-500 opacity-10"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-2/3 section-fade">
+                    <h2 class="text-4xl font-bold text-white mb-6 text-glow">About Me</h2>
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                        Passionate Frontend Developer with expertise in creating modern, responsive web applications. 
+                        I combine creative design with clean code to deliver exceptional user experiences.
+                    </p>
+                    <p class="text-lg text-gray-300 mb-8 leading-relaxed">
+                        Specialized in Python development and modern web technologies, I'm always eager to learn 
+                        new technologies and tackle challenging projects.
+                    </p>
+                    
+                    <h3 class="text-2xl font-semibold text-white mb-6">Technical Skills</h3>
+                    <div class="flex flex-wrap gap-4 mb-8">
+                        <span class="skill-tag text-white px-6 py-3 rounded-full text-sm font-medium">
+                            <i class="fab fa-html5 mr-2"></i>HTML
+                        </span>
+                        <span class="skill-tag text-white px-6 py-3 rounded-full text-sm font-medium">
+                            <i class="fab fa-css3-alt mr-2"></i>CSS
+                        </span>
+                        <span class="skill-tag text-white px-6 py-3 rounded-full text-sm font-medium">
+                            <i class="fab fa-bootstrap mr-2"></i>Bootstrap
+                        </span>
+                        <span class="skill-tag text-white px-6 py-3 rounded-full text-sm font-medium">
+                            <i class="fab fa-js-square mr-2"></i>JavaScript
+                        </span>
+                        <span class="skill-tag text-white px-6 py-3 rounded-full text-sm font-medium">
+                            <i class="fab fa-python mr-2"></i>Python
+                        </span>
+                    </div>
+                    
+                    <h3 class="text-2xl font-semibold text-white mb-6">Soft Skills</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="bg-gradient-to-br from-blue-500/20 to-blue-600/20 border border-blue-500/30 rounded-xl p-4 text-center hover:scale-105 transition-transform duration-300">
+                            <i class="fas fa-comments text-2xl text-blue-400 mb-3"></i>
+                            <h4 class="text-white font-semibold mb-2">Communication</h4>
+                            <p class="text-gray-300 text-sm">Clear and effective verbal & written communication</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-green-500/20 to-green-600/20 border border-green-500/30 rounded-xl p-4 text-center hover:scale-105 transition-transform duration-300">
+                            <i class="fas fa-users text-2xl text-green-400 mb-3"></i>
+                            <h4 class="text-white font-semibold mb-2">Teamwork</h4>
+                            <p class="text-gray-300 text-sm">Collaborative approach to achieving common goals</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-purple-500/20 to-purple-600/20 border border-purple-500/30 rounded-xl p-4 text-center hover:scale-105 transition-transform duration-300">
+                            <i class="fas fa-clock text-2xl text-purple-400 mb-3"></i>
+                            <h4 class="text-white font-semibold mb-2">Time Management</h4>
+                            <p class="text-gray-300 text-sm">Efficient prioritization and deadline management</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-orange-500/20 to-orange-600/20 border border-orange-500/30 rounded-xl p-4 text-center hover:scale-105 transition-transform duration-300">
+                            <i class="fas fa-lightbulb text-2xl text-orange-400 mb-3"></i>
+                            <h4 class="text-white font-semibold mb-2">Problem Solving</h4>
+                            <p class="text-gray-300 text-sm">Creative solutions to complex challenges</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-red-500/20 to-red-600/20 border border-red-500/30 rounded-xl p-4 text-center hover:scale-105 transition-transform duration-300">
+                            <i class="fas fa-chart-line text-2xl text-red-400 mb-3"></i>
+                            <h4 class="text-white font-semibold mb-2">Leadership</h4>
+                            <p class="text-gray-300 text-sm">Guiding teams and driving project success</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-teal-500/20 to-teal-600/20 border border-teal-500/30 rounded-xl p-4 text-center hover:scale-105 transition-transform duration-300">
+                            <i class="fas fa-sync-alt text-2xl text-teal-400 mb-3"></i>
+                            <h4 class="text-white font-semibold mb-2">Adaptability</h4>
+                            <p class="text-gray-300 text-sm">Quick learning and flexibility in changing environments</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-pink-500/20 to-pink-600/20 border border-pink-500/30 rounded-xl p-4 text-center hover:scale-105 transition-transform duration-300">
+                            <i class="fas fa-eye text-2xl text-pink-400 mb-3"></i>
+                            <h4 class="text-white font-semibold mb-2">Attention to Detail</h4>
+                            <p class="text-gray-300 text-sm">Meticulous approach to quality and precision</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-indigo-500/20 to-indigo-600/20 border border-indigo-500/30 rounded-xl p-4 text-center hover:scale-105 transition-transform duration-300">
+                            <i class="fas fa-handshake text-2xl text-indigo-400 mb-3"></i>
+                            <h4 class="text-white font-semibold mb-2">Client Relations</h4>
+                            <p class="text-gray-300 text-sm">Building strong professional relationships</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 section-fade">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">My Projects</h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto">A showcase of my recent work and technical expertise</p>
+                <div class="w-20 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mt-6 rounded-full"></div>
+            </div>
+            
+            <!-- Projects Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                <!-- Project 1 -->
+                <div class="section-fade">
+                    <div class="bg-gray-800 rounded-xl overflow-hidden border border-gray-700 hover:border-gray-600 transition-all duration-300 group">
+                        <div class="relative">
+                            <img src="images/Screenshot 2025-09-10 114134.png" 
+                                 alt="Modern Cow Care Platform" 
+                                 class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                                 onerror="this.src=''; this.alt='Project image failed to load'; this.style.display='none';">
+                            <div class="absolute top-4 right-4">
+                                <span class="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-medium">Completed</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-white mb-3">Modern Cow Care Platform</h3>
+                            <p class="text-gray-400 mb-4 text-sm leading-relaxed">
+                                Modern cow care combines tradition with technology.Healthy cows mean healthy milk and a strong future.Smart farming, happy animals, and better productivity.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-orange-500/20 text-orange-400 px-2 py-1 rounded text-xs">HTML5</span>
+                                <span class="bg-blue-500/20 text-blue-400 px-2 py-1 rounded text-xs">CSS3</span>
+                                <span class="bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded text-xs">JavaScript</span>
+                            </div>
+                            <div class="flex space-x-3">
+                                <a href="https://srinath-fsd.github.io/Modern_CowCare/"class="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors">View Project</a>
+                                
+                                <button class="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg text-sm transition-colors">
+                                    <i class="fab fa-github"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="section-fade">
+                    <div class="bg-gray-800 rounded-xl overflow-hidden border border-gray-700 hover:border-gray-600 transition-all duration-300 group">
+                        <div class="relative">
+                            <img src="images/babycare1.png" 
+                                 alt="Data Analytics Dashboard" 
+                                 class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                                 onerror="this.src=''; this.alt='Project image failed to load'; this.style.display='none';">
+                            <div class="absolute top-4 right-4">
+                                <span class="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-medium">Completed</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-white mb-3">Modern Baby Care</h3>
+                            <p class="text-gray-400 mb-4 text-sm leading-relaxed">
+                                Modern baby care meets the power of AI.From pregnancy to childhood, smarter guidance every step.Healthy growth, happy parenting, and a brighter future.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">HTML</span>
+                                <span class="bg-blue-500/20 text-blue-400 px-2 py-1 rounded text-xs">CSS</span>
+                                <span class="bg-purple-500/20 text-purple-400 px-2 py-1 rounded text-xs">BOOTSTRAP</span>
+                                 <span class="bg-red-500/20 text-purple-400 px-2 py-1 rounded text-xs">Java Script</span>
+                            </div>
+                            <div class="flex space-x-3">
+                                <a href="https://srinath-fsd.github.io/Modern_BabyCare/"class="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors">View Project</a>
+                                
+                                <button class="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg text-sm transition-colors">
+                                    <i class="fab fa-github"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="section-fade">
+                    <div class="bg-gray-800 rounded-xl overflow-hidden border border-gray-700 hover:border-gray-600 transition-all duration-300 group">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop" 
+                                 alt="E-Commerce Platform" 
+                                 class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                                 onerror="this.src=''; this.alt='Project image failed to load'; this.style.display='none';">
+                            <div class="absolute top-4 right-4">
+                                <span class="bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-medium">Planning</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-white mb-3">E-Commerce Platform</h3>
+                            <p class="text-gray-400 mb-4 text-sm leading-relaxed">
+                                Full-featured e-commerce solution with modern UI/UX design and responsive layout.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-purple-500/20 text-purple-400 px-2 py-1 rounded text-xs">Bootstrap</span>
+                                <span class="bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded text-xs">JavaScript</span>
+                                <span class="bg-green-500/20 text-green-400 px-2 py-1 rounded text-xs">Node.js</span>
+                            </div>
+                            <div class="flex space-x-3">
+                                <button class="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors">
+                                    View Project
+                                </button>
+                                <button class="bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg text-sm transition-colors">
+                                    <i class="fab fa-github"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+           
+
+    <!-- About Me Section -->
+    <section id="about" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center section-fade">
+                <h2 class="text-5xl font-bold text-white mb-8 text-glow">More About Me</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mb-12 rounded-full"></div>
+                <div class="grid md:grid-cols-3 gap-8 mb-12">
+                    <div class="card-hover p-8 dark-card rounded-xl group">
+                        <div class="relative">
+                            <i class="fas fa-code text-5xl text-purple-400 mb-6 group-hover:scale-110 transition-transform duration-300"></i>
+                            <div class="absolute inset-0 bg-purple-500 opacity-0 group-hover:opacity-10 rounded-xl transition-opacity duration-300"></div>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-4">Clean Code</h3>
+                        <p class="text-gray-300 leading-relaxed">Writing maintainable, scalable, and efficient code following best practices.</p>
+                    </div>
+                    <div class="card-hover p-8 dark-card rounded-xl group">
+                        <div class="relative">
+                            <i class="fas fa-mobile-alt text-5xl text-blue-400 mb-6 group-hover:scale-110 transition-transform duration-300"></i>
+                            <div class="absolute inset-0 bg-blue-500 opacity-0 group-hover:opacity-10 rounded-xl transition-opacity duration-300"></div>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-4">Responsive Design</h3>
+                        <p class="text-gray-300 leading-relaxed">Creating seamless experiences across all devices and screen sizes.</p>
+                    </div>
+                    <div class="card-hover p-8 dark-card rounded-xl group">
+                        <div class="relative">
+                            <i class="fas fa-lightbulb text-5xl text-yellow-400 mb-6 group-hover:scale-110 transition-transform duration-300"></i>
+                            <div class="absolute inset-0 bg-yellow-500 opacity-0 group-hover:opacity-10 rounded-xl transition-opacity duration-300"></div>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-4">Problem Solving</h3>
+                        <p class="text-gray-300 leading-relaxed">Analytical thinking and creative solutions to complex challenges.</p>
+                    </div>
+                </div>
+                <p class="text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
+                    With a strong foundation in both frontend and backend technologies, I bring a comprehensive 
+                    approach to web development. My passion lies in creating user-centric applications that not 
+                    only look great but also provide exceptional functionality and performance.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 section-fade">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">Get In Touch</h2>
+                <p class="text-lg text-gray-400">Let's discuss your next project</p>
+                <div class="w-20 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto mt-6 rounded-full"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <!-- Contact Form -->
+                <div class="section-fade mb-16">
+                    <div class="bg-gray-800 p-8 rounded-xl border border-gray-700">
+                        <h3 class="text-2xl font-semibold text-white mb-6 text-center">Send Message</h3>
+                        <form id="contact-form" class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-gray-300 font-medium mb-2">Name</label>
+                                    <input type="text" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white placeholder-gray-400" placeholder="Your Name" required>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-300 font-medium mb-2">Email</label>
+                                    <input type="email" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white placeholder-gray-400" placeholder="your@email.com" required>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-gray-300 font-medium mb-2">Message</label>
+                                <textarea rows="5" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white placeholder-gray-400" placeholder="Your message..." required></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105">
+                                    <i class="fas fa-paper-plane mr-2"></i>
+                                    Send Message
+                                </button>
+                            </div>
+                        </form>
+                        <div id="form-message" class="mt-4 text-center hidden"></div>
+                    </div>
+                </div>
+                
+                <!-- Contact App Icons -->
+                <div class="section-fade">
+                    <div class="flex justify-center items-center space-x-8 flex-wrap gap-6">
+                        <!-- GitHub App Icon -->
+                        <a href="https://github.com/Srinath-FSD" target="_blank" class="group relative">
+                            <div class="w-20 h-20 bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl flex items-center justify-center shadow-2xl transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 relative overflow-hidden border border-gray-700">
+                                <!-- Neon glow effect -->
+                                <div class="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"></div>
+                                <div class="absolute -inset-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-3xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+                                <i class="fab fa-github text-3xl text-white relative z-10 group-hover:text-purple-300 transition-colors"></i>
+                                <!-- App shine effect -->
+                                <div class="absolute top-2 left-2 w-6 h-6 bg-white/20 rounded-full blur-sm opacity-60"></div>
+                            </div>
+                            <p class="text-center text-white text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity">GitHub</p>
+                        </a>
+                        
+                        <!-- LinkedIn App Icon -->
+                        <a href="https://www.linkedin.com/in/srinath-k-9aa0b437a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="group relative">
+                            <div class="w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl flex items-center justify-center shadow-2xl transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 relative overflow-hidden">
+                                <!-- Neon glow effect -->
+                                <div class="absolute -inset-1 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-3xl blur opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
+                                <i class="fab fa-linkedin text-3xl text-white relative z-10 group-hover:text-blue-200 transition-colors"></i>
+                                <!-- App shine effect -->
+                                <div class="absolute top-2 left-2 w-6 h-6 bg-white/30 rounded-full blur-sm"></div>
+                            </div>
+                            <p class="text-center text-white text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity">LinkedIn</p>
+                        </a>
+                        
+                        <!-- WhatsApp App Icon -->
+                        <a href="https://wa.me/918056655187" target="_blank" class="group relative">
+                            <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-700 rounded-3xl flex items-center justify-center shadow-2xl transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 relative overflow-hidden">
+                                <!-- Neon glow effect -->
+                                <div class="absolute -inset-1 bg-gradient-to-r from-green-400 to-emerald-400 rounded-3xl blur opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
+                                <i class="fab fa-whatsapp text-3xl text-white relative z-10 group-hover:text-green-200 transition-colors"></i>
+                                <!-- App shine effect -->
+                                <div class="absolute top-2 left-2 w-6 h-6 bg-white/30 rounded-full blur-sm"></div>
+                                <!-- WhatsApp notification dot -->
+                                <div class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-xs font-bold">1</span>
+                                </div>
+                            </div>
+                            <p class="text-center text-white text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity">WhatsApp</p>
+                        </a>
+                        
+                        <!-- Email App Icon -->
+                        <a href="mailto:srinath35fsd@gmail.com" class="group relative">
+                            <div class="w-20 h-20 bg-gradient-to-br from-red-500 to-pink-600 rounded-3xl flex items-center justify-center shadow-2xl transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 relative overflow-hidden">
+                                <!-- Neon glow effect -->
+                                <div class="absolute -inset-1 bg-gradient-to-r from-red-400 to-pink-400 rounded-3xl blur opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
+                                <i class="fas fa-envelope text-3xl text-white relative z-10 group-hover:text-red-200 transition-colors"></i>
+                                <!-- App shine effect -->
+                                <div class="absolute top-2 left-2 w-6 h-6 bg-white/30 rounded-full blur-sm"></div>
+                            </div>
+                            <p class="text-center text-white text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Email</p>
+                        </a>
+                    </div>
+                    
+                    <!-- Contact Info Text -->
+                    <div class="text-center mt-8">
+                        <p class="text-gray-400 text-sm">Tap any icon to connect with me</p>
+                    </div>
+                </div>
+                
+                <!-- Chat on WhatsApp Button -->
+                <div class="text-center mt-12 section-fade">
+                    <a href="https://wa.me/918056655187" target="_blank" class="inline-flex items-center bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full font-medium text-lg transition-all duration-300 transform hover:scale-105">
+                        <i class="fab fa-whatsapp mr-3 text-xl"></i>
+                        Chat on WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center mr-3">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">CodeCraft Studios</h3>
+                            <p class="text-sm text-purple-400">by Srinath</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400">Premium web development services. Creating amazing digital experiences with modern technologies and creative solutions.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <div class="space-y-2">
+                        <a href="#home" class="block text-gray-400 hover:text-white transition-colors">Home</a>
+                        <a href="#about" class="block text-gray-400 hover:text-white transition-colors">About</a>
+                        <a href="#projects" class="block text-gray-400 hover:text-white transition-colors">Projects</a>
+                        <a href="#contact" class="block text-gray-400 hover:text-white transition-colors">Contact</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact</h4>
+                    <div class="space-y-2 text-gray-400">
+                        <p>Phone: +91 8056655187</p>
+                        <p>GitHub: Srinath-FSD</p>
+                        <p>Available for freelance work</p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 CodeCraft Studios. All rights reserved. Built with passion and code by Srinath.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Contact form handling
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const messageDiv = document.getElementById('form-message');
+            messageDiv.className = 'mt-4 text-center p-4 bg-green-100 text-green-800 rounded-lg';
+            messageDiv.textContent = 'Thank you for your message! This is a demo form. Please contact me directly via WhatsApp or LinkedIn.';
+            messageDiv.classList.remove('hidden');
+            this.reset();
+            
+            setTimeout(() => {
+                messageDiv.classList.add('hidden');
+            }, 5000);
+        });
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0.2s';
+                    entry.target.classList.add('section-fade');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for animation
+        document.querySelectorAll('section > div').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Typing animation for the hero title
+        const typingElement = document.querySelector('.typing-animation');
+        if (typingElement) {
+            setInterval(() => {
+                typingElement.style.borderColor = typingElement.style.borderColor === 'transparent' ? '#667eea' : 'transparent';
+            }, 500);
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97d4c99107aa85ee',t:'MTc1NzU2ODc3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
